@@ -1,8 +1,7 @@
-
 /*
 TECLAS:
-S: png
-P: PDF
+ S: png
+ P: PDF
  */
 
 // imports
@@ -16,7 +15,7 @@ int yCount = 60;
 float gridSize = 600;
 
 float pcX, pcY, pcZ; //pos camara
-int radio = 50;
+int radio = 250;
 
 // array nodos
 Node[] myNodes = new Node[xCount*yCount];
@@ -28,8 +27,6 @@ Attractor myAttractor;
 boolean saveOneFrame = false;
 boolean saveToPrint = false;
 
-
-
 void setup() {  
   size(800, 800, OPENGL); 
 
@@ -40,7 +37,6 @@ void setup() {
   fill(0);
 
   background(255); 
-
 
   // nodos reticula
   initGrid();
@@ -55,16 +51,15 @@ void draw() {
   }
 
   background(255);
-   update();
-  camera(pcX, pcY, pcZ, 0, 0, 0, 0, -1, 0); 
+  update();
+  camera(pcX, pcY, pcZ, gridSize/2, gridSize/2, 0, 0, 0, -1); 
 
   for (int i = 0; i < myNodes.length; i++) {
-      myAttractor.attract(myNodes[i]);
-    
+    myAttractor.attract(myNodes[i]);
+
     if (saveToPrint) {
       ellipse(myNodes[i].x, myNodes[i].y, 2, 2);
-    }
-    else {
+    } else {
       rect(myNodes[i].x, myNodes[i].y, 1, 1);
     }
   }
@@ -115,17 +110,11 @@ void keyPressed() {
 
 
 void update() {
-  pcY=radio;
-  pcX = sin(frameCount*0.01)*radio;
-  pcZ = cos(frameCount*0.01)*radio;
+  pcX = gridSize/2-300;
+  pcY = gridSize/2-300;
+  pcZ = radio;
+  /*
+  pcX = width/2+sin(frameCount*0.01)*radio;
+   pcY = height/2+cos(frameCount*0.01)*radio;
+   */
 }
-
-
-
-
-
-
-
-
-
-
